@@ -1,0 +1,10 @@
+dem13n-auth-vkontakte:
+     admin:
+         vkontakte_settings:
+              title: Настройки входа через Вконтакте
+              app_id_label: ID Приложения
+              app_key_label: Защищённый ключ
+              app_desc: Зарегистрировать свое приложение вы можете здесь <a>https://vk.com/apps?act=manage</a>
+              app_p:  Callback URL
+     forum:
+          login_with_vkontakte_button: Войти через Вконтакте

@@ -1,0 +1,38 @@
+{
+  "name": "dem13n/auth-vkontakte",
+  "description": "Allow users to login with Vkontakte.",
+  "keywords": [
+    "flarum"
+  ],
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^0.1.0-beta.8",
+    "sergey-sla/oauth2-vkontakte": "^1.0.8"
+  },
+  "authors": [
+    {
+      "name": "Dem13n",
+      "email": "idem13n@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dem13n\\Auth\\Vkontakte\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Vkontakte Login",
+      "icon": {
+                "name": "fab fa-vk",
+                "backgroundColor": "#4A75A8",
+                "color": "#fff"
+      }
+    },
+    "flagrow": {
+      "discuss": ""
+    }
+  }
+}
