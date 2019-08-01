@@ -36,23 +36,23 @@ class VkontakteAuthController implements RequestHandlerInterface
             'clientSecret' => $this->settings->get('dem13n-auth-vkontakte.app_key'),
             'redirectUri' => $redirectUri,
             'version' => '5.101'
-            ]);
+        ]);
 
         $session = $request->getAttribute('session');
         $queryParams = $request->getQueryParams();
 
         $code = array_get($queryParams, 'code');
 
-        if (! $code) {
+        if (!$code) {
             $authUrl = $provider->getAuthorizationUrl();
             $session->put('oauth2state', $provider->getState());
 
-            return new RedirectResponse($authUrl.'&display=popup');
+            return new RedirectResponse($authUrl . '&display=popup');
         }
 
         $state = array_get($queryParams, 'state');
 
-        if (! $state || $state !== $session->get('oauth2state')) {
+        if (!$state || $state !== $session->get('oauth2state')) {
             $session->remove('oauth2state');
 
             throw new Exception('Invalid state');
@@ -66,11 +66,9 @@ class VkontakteAuthController implements RequestHandlerInterface
             'vkontakte',
             $token->getResourceOwnerId(),
             function (Registration $registration) use ($user) {
-                $registration
-                    ->provideTrustedEmail($user->getEmail())
-                    ->provideAvatar(array_get($user->toArray(), 'photo_100'))
-                    ->suggestUsername($user->getName())
-                    ->setPayload($user->toArray());
+                $reg =  $registration->provideAvatar(array_get($user->toArray(), 'photo_100'))->suggestUsername($user->getName());
+                empty($user->getEmail()) ?  $reg->suggestEmail('') : $reg->provideTrustedEmail($user->getEmail());
+                $reg->setPayload($user->toArray());
             }
         );
     }
